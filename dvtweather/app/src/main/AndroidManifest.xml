@@ -15,12 +15,13 @@
     <application
         android:name=".DvtWeatherApp"
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
+
         <service android:name=".service.SyncService" />
 
         <activity

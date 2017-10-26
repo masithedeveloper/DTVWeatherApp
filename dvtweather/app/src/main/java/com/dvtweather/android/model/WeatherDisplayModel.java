@@ -9,7 +9,7 @@ import com.androidnetworking.widget.ANImageView;
 public class WeatherDisplayModel {
     public String max_tem = "";
     public String min_tem = "";
-    public ANImageView icon;
+    public String icon_url = "";
     public String city = "";
     public String country = "";
 
@@ -29,12 +29,12 @@ public class WeatherDisplayModel {
         this.min_tem = min_tem;
     }
 
-    public ANImageView getIcon() {
-        return icon;
+    public String getIcon_url() {
+        return icon_url;
     }
 
-    public void setIcon(ANImageView icon) {
-        this.icon = icon;
+    public void setIcon_url(String icon_url) {
+        this.icon_url = icon_url;
     }
 
     public String getCity() {

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.androidnetworking.error.ANError;
 import com.dvtweather.android.R;
+import com.dvtweather.android.communication.ApiEndPoint;
 import com.dvtweather.android.communication.AppApiHelper;
 import com.dvtweather.android.model.GetWeatherRequest;
 import com.dvtweather.android.model.GetWeatherResponse;
@@ -40,11 +41,9 @@ public class WeatherPresenter<V extends WeatherMvpView> extends BasePresenter<V>
                         }
 
                         WeatherDisplayModel weatherDisplayModel = new WeatherDisplayModel();
-                        weatherDisplayModel.setMax_tem(String.valueOf(response.main.getTempMax() - 273.15F));
-                        weatherDisplayModel.setMin_tem(String.valueOf(response.main.getTempMin()- 273.15F));
-                        weatherDisplayModel.getIcon().setDefaultImageResId(R.drawable.ic_launcher);
-                        weatherDisplayModel.getIcon().setErrorImageResId(R.drawable.ic_launcher);
-                        weatherDisplayModel.getIcon().setImageUrl( "http://1.89146.185.18/img/w/" + response.weather[0].getIcon() +".png");
+                        weatherDisplayModel.setMax_tem(String.valueOf((int) Math.round(response.main.getTempMax()- 273.15F)));
+                        weatherDisplayModel.setMin_tem(String.valueOf((int) Math.round(response.main.getTempMin()- 273.15F)));
+                        weatherDisplayModel.setIcon_url(response.weather[0].getIcon());
                         weatherDisplayModel.setCity(response.getName());
                         weatherDisplayModel.setCountry(String.valueOf(response.sys.getCountry()));
 

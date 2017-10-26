@@ -12,6 +12,8 @@ import com.dvtweather.android.communication.LocationPreferencesHelper;
 import com.dvtweather.android.model.WeatherDisplayModel;
 import com.dvtweather.android.presentable.base.BaseActivity;
 import com.dvtweather.android.utilities.CommonUtils;
+import com.dvtweather.android.utilities.ImageHandler;
+import com.dvtweather.android.utilities.RoundedImageView;
 
 import javax.inject.Inject;
 import butterknife.ButterKnife;
@@ -26,7 +28,7 @@ public class WeatherActivity extends BaseActivity implements WeatherMvpView {
     WeatherMvpPresenter<WeatherMvpView> mPresenter;
 
     TextView weather_sync_date;
-    ANImageView weather_image;
+    RoundedImageView weather_image;
     TextView weather_max_temperature_value;
     TextView weather_min_temperature_value;
     TextView weather_location_city;
@@ -56,7 +58,7 @@ public class WeatherActivity extends BaseActivity implements WeatherMvpView {
     //----------------------------------------------------------------------------------
     private void setUpUI() {
         weather_sync_date = (TextView) findViewById(R.id.weather_sync_date);
-        weather_image = (ANImageView) findViewById(R.id.weather_image);
+        weather_image = (RoundedImageView) findViewById(R.id.weather_image);
         weather_max_temperature_value = (TextView) findViewById(R.id.weather_max_temperature_value);
         weather_min_temperature_value = (TextView) findViewById(R.id.weather_min_temperature_value);
         weather_location_city = (TextView) findViewById(R.id.weather_location_city);
@@ -79,10 +81,10 @@ public class WeatherActivity extends BaseActivity implements WeatherMvpView {
     @Override
     public void setWeather(WeatherDisplayModel getWeatherResponse) {
         weather_sync_date.setText(CommonUtils.getToday());
-        weather_max_temperature_value.setText(String.valueOf(getWeatherResponse.getMax_tem()) + "\u2103" + "C");
-        weather_min_temperature_value.setText(String.valueOf(getWeatherResponse.getMin_tem())+ "\u2103" + "C");
-        weather_image = getWeatherResponse.getIcon(); // this is interesting
-        weather_location_city.setText(getWeatherResponse.getCity());
+        weather_max_temperature_value.setText(getWeatherResponse.getMax_tem() + "\u2103");
+        weather_min_temperature_value.setText(getWeatherResponse.getMin_tem()+ "\u2103");
+        new ImageHandler(this).display_image_from_url(weather_image, getWeatherResponse.getIcon_url() );
+        weather_location_city.setText(getWeatherResponse.getCity()+ ", ");
         weather_location_country.setText(getWeatherResponse.getCountry());
     }
     //----------------------------------------------------------------------------------
