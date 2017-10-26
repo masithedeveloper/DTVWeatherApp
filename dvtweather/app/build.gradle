@@ -1,0 +1,89 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+apply from: '../config/quality/quality.gradle'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+    defaultConfig {
+        applicationId 'com.dvtweather.android'
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        debug {
+            //buildConfigField("String", "WEATHER_SERVICE_BASE_URL", "\"https://api.openweathermap.org/data/2.5/weather?\"")
+            buildConfigField("String", "WEATHER_SERVICE_BASE_URL", "\"http://146.185.181.89/data/2.5/weather?\"")
+            buildConfigField("String", "WEATHER_SERVICE_IMAGE_URL", "\"http://146.185.181.89/img/w/\"")
+            buildConfigField("String", "WEATHER_SERVICE_API_KEY", "\"0ad677f22851006385ae6d082f3b3525\"")
+            debuggable true
+            jniDebuggable false
+            renderscriptDebuggable false
+            minifyEnabled false
+            zipAlignEnabled true
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //buildConfigField("String", "WEATHER_SERVICE_BASE_URL", "\"https://api.openweathermap.org/data/2.5/weather?\"")
+            buildConfigField("String", "WEATHER_SERVICE_BASE_URL", "\"http://146.185.181.89/data/2.5/weather?\"")
+            buildConfigField("String", "WEATHER_SERVICE_IMAGE_URL", "\"http://146.185.181.89/img/w/\"")
+            buildConfigField("String", "WEATHER_SERVICE_API_KEY", "\"0ad677f22851006385ae6d082f3b3525\"")
+        }
+    }
+    productFlavors {
+    }
+}
+
+greendao {
+    schemaVersion 1
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    // android support libraries
+    compile "com.android.support:appcompat-v7:25.3.1"
+    compile "com.android.support:recyclerview-v7:25.3.1"
+    compile "com.android.support:cardview-v7:25.3.1"
+    compile "com.android.support:design:25.3.1"
+    compile "com.android.support:support-vector-drawable:25.3.1"
+    compile "com.android.support:animated-vector-drawable:25.3.1"
+    compile 'com.afollestad.material-dialogs:core:0.9.4.5'
+    compile 'com.kishan.askpermission:askpermission:1.0.3'
+    // font
+    compile "uk.co.chrisjenx:calligraphy:2.2.0"
+    // network
+    compile "com.amitshekhar.android:rx2-android-networking:1.0.0"
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+
+    // image
+    compile "com.github.bumptech.glide:glide:3.7.0"
+    // parser
+    compile "com.google.code.gson:gson:2.8.0"
+    // database
+    compile "org.greenrobot:greendao:3.2.0"
+    // debug database
+    debugCompile "com.amitshekhar.android:debug-db:1.0.0"
+    // dependency injection
+    compile "com.google.dagger:dagger:2.8"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.8"
+    provided 'javax.annotation:jsr250-api:1.0'
+    compile 'javax.inject:javax.inject:1'
+    // reactive
+    compile "io.reactivex.rxjava2:rxjava:2.0.6"
+    compile "io.reactivex.rxjava2:rxandroid:2.0.1"
+    // code generator for view
+    compile "com.jakewharton:butterknife:8.6.0"
+    annotationProcessor "com.jakewharton:butterknife-compiler:8.6.0"
+    // swipe view
+    compile "com.mindorks:placeholderview:0.6.1"
+    // logger
+    compile "com.jakewharton.timber:timber:4.5.1"
+}
+
+configurations.all {
+    resolutionStrategy.force "com.android.support:support-annotations:25.0.1"
+}
